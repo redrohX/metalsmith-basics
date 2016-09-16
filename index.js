@@ -9,10 +9,12 @@ Metalsmith(__dirname)
     .use(layouts({
         engine: 'handlebars',
         directory: 'layouts',
-        partials: 'partials'
+        partials: 'layouts/partials',
+        rename: true
     }))
     .use(inplace({
-        engine: 'handlebars'
+        engine: 'handlebars',
+        rename: true
     }))
     .build(function(err) {
         if (err) {
