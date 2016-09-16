@@ -1,1 +1,1 @@
-# metalsmith-contentful
+# metalsmith-basics
