@@ -4,14 +4,22 @@
   "description": "Integrating Contentful with Metalsmith",
   "main": "index.js",
   "dependencies": {
-    "metalsmith": "^2.2.0"
+    "gulp": "^3.9.1",
+    "metalsmith": "^2.2.0",
+    "metalsmith-rootpath": "^1.0.4"
   },
   "devDependencies": {
+    "autoprefixer": "^6.4.1",
+    "browser-sync": "^2.16.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^6.2.0",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.2.0",
-    "metalsmith-collections": "^0.7.0",
     "metalsmith-in-place": "^1.4.4",
-    "metalsmith-layouts": "^1.6.5"
+    "metalsmith-layouts": "^1.6.5",
+    "postcss-scss": "^0.3.0",
+    "precss": "^1.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,11 +1,29 @@
-var Metalsmith = require('metalsmith');
-var collections = require('metalsmith-collections');
+var metalsmith = require('metalsmith');
 var layouts = require('metalsmith-layouts');
 var inplace = require('metalsmith-in-place');
+var rootPath = require('metalsmith-rootpath');
 
-Metalsmith(__dirname)
+function debug(logToConsole) {
+    return function(files, metalsmith, done) {
+        if (logToConsole) {
+            console.log('\nMETADATA:');
+            console.log(metalsmith.metadata());
+
+            for (var f in files) {
+                console.log('\nFILE:');
+                console.log(files[f]);
+            }
+        }
+
+        done();
+    };
+}
+
+metalsmith(__dirname)
+    .clean(true)
     .source('src')
     .destination('build')
+    .use(rootPath())
     .use(layouts({
         engine: 'handlebars',
         directory: 'layouts',
@@ -16,9 +34,10 @@ Metalsmith(__dirname)
         engine: 'handlebars',
         rename: true
     }))
+    .use(debug(true))
     .build(function(err) {
         if (err) {
-            console.log(err);
+            throw err;
         }
         else {
             console.log('Build ran without problems');
