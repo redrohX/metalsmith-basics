@@ -1,0 +1,23 @@
+/*Variables*/
+$blue: #0000ff;
+$green: #00ff00;
+$radius: 10px;
+
+/*Mixins*/
+@define-mixin square $dimension {
+    width: $dimension;
+    height: $dimension;
+}
+
+body {
+    background: $green;
+}
+
+:fullscreen a {
+    display: flex
+}
+
+button {
+    @mixin square 200px;
+    color: $green;
+}
