@@ -3,6 +3,7 @@ var metalsmith = require('metalsmith');
 var layouts = require('metalsmith-layouts');
 var inplace = require('metalsmith-in-place');
 var rootPath = require('metalsmith-rootpath');
+var ignore = require('metalsmith-ignore');
 var del = require('del');
 
 var browserSync = require('browser-sync');
@@ -19,15 +20,19 @@ gulp.task('clean', function () {
 
 gulp.task('html', function() {
     var ms = metalsmith(__dirname)
-    .clean(true)
+    .clean(false)
     .source('src')
+    .use(ignore([
+      'css/**/*'
+    ]))
     .destination('build')
     .use(rootPath())
     .use(layouts({
         engine: 'handlebars',
         directory: 'layouts',
         partials: 'layouts/partials',
-        rename: true
+        rename: true,
+        pattern: '*.hbs'
     }))
     .use(inplace({
         engine: 'handlebars'
@@ -74,4 +79,4 @@ gulp.task('watch', function() {
 	gulp.watch("./src/*.hbs", ['html', browserSync.reload]);
 });
 
-gulp.task('default', ['clean', 'html', 'css', 'browser-sync', 'watch']);
+gulp.task('default', ['html', 'css', 'browser-sync', 'watch']);

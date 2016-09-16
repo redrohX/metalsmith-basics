@@ -16,6 +16,7 @@
     "gulp-postcss": "^6.2.0",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.2.0",
+    "metalsmith-ignore": "^0.1.2",
     "metalsmith-in-place": "^1.4.4",
     "metalsmith-layouts": "^1.6.5",
     "postcss-scss": "^0.3.0",
