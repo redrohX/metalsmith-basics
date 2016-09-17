@@ -5,24 +5,24 @@ $black: #333;
 $radius: 10px;
 
 /*Mixins*/
-@define-mixin square $dimension {
+@mixin square($dimension) {
     width: $dimension;
     height: $dimension;
 }
 
-@define-mixin ellipsis {
+@mixin ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
 body {
-    background: $green;
+    background: $blue;
     color: $black;
 }
 
 p {
-    @mixin ellipsis;
+    @include ellipsis;
 }
 
 :fullscreen a {
@@ -31,5 +31,5 @@ p {
 
 button {
     color: $green;
-    @mixin square 200px;
+    @include square(200px);
 }
