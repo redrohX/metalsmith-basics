@@ -1,35 +1,39 @@
-/*Variables*/
-$blue: lightblue;
+//Variables
+$blue: #00f999;
 $green: #66fd02;
 $black: #333;
 $radius: 10px;
 
-/*Mixins*/
+$bg-color: $blue;
+
+//Mixins
 @mixin square($dimension) {
-    width: $dimension;
     height: $dimension;
+    width: $dimension;
 }
 
 @mixin ellipsis {
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 body {
-    background: $blue;
+    background: $bg-color;
     color: $black;
+}
+
+:fullscreen {
+    a {
+        display: flex;
+    }
 }
 
 p {
     @include ellipsis;
 }
 
-:fullscreen a {
-    display: flex
-}
-
 button {
-    color: $green;
     @include square(200px);
+    color: $green;
 }
