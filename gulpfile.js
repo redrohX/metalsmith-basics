@@ -12,6 +12,8 @@ var processors  = [
     require('precss')(),
     require('autoprefixer')({browsers: ['last 3 version']})
 ];
+var concat      = require('gulp-concat');
+var sourcemaps  = require('gulp-sourcemaps');
 
 gulp.task('html', function() {
     var ms = metalsmith(__dirname)
@@ -54,6 +56,9 @@ gulp.task('browser-sync', function() {
 
 gulp.task('scripts', function () {
     return gulp.src('./src/js/*.js')
+        .pipe(sourcemaps.init())
+            .pipe(concat('all.js'))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./build/js/'))
         .pipe(browserSync.stream());
 });
@@ -69,16 +74,16 @@ gulp.task('css', function () {
 gulp.task('watch', function() {
 
 	// Watch .css files
-	gulp.watch('./src/css/*.css', ['css', browserSync.reload]);
+	gulp.watch('./src/css/*.css', ['css', reload]);
 
 	// Watch .js files
-	gulp.watch(['src/js/*.js'], ['scripts', browserSync.reload]);
+	gulp.watch(['src/js/*.js'], ['scripts', reload]);
 
 	// Watch image files
 	// gulp.watch('src/img/**/*', ['images']);
 
 	// Watch any files in dist/, reload on change
-	gulp.watch(['./src/**/*.hbs', './layouts/**/*.hbs'], ['html', browserSync.reload]);
+	gulp.watch(['./src/**/*.hbs', './layouts/**/*.hbs'], ['html', reload]);
 });
 
 gulp.task('default', ['html', 'css', 'scripts', 'browser-sync', 'watch']);
