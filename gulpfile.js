@@ -13,6 +13,7 @@ var sourcemaps  = require('gulp-sourcemaps');
 var environments = require('gulp-environments');
 var development = environments.development;
 var production = environments.production;
+var uglify = require('gulp-uglify');
 
 gulp.task('html', function() {
     var ms = metalsmith(__dirname)
@@ -53,6 +54,7 @@ gulp.task('scripts', function () {
         .pipe(development(sourcemaps.init()))
             .pipe(concat('all.js'))
         .pipe(development(sourcemaps.write()))
+        .pipe(production(uglify()))
         .pipe(gulp.dest('./build/js/'))
         .pipe(browserSync.stream());
 });
