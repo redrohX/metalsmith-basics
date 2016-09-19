@@ -10,6 +10,9 @@ var postcss     = require('gulp-postcss');
 var processors  = [require('autoprefixer')({browsers: ['last 3 version']})];
 var concat      = require('gulp-concat');
 var sourcemaps  = require('gulp-sourcemaps');
+var environments = require('gulp-environments');
+var development = environments.development;
+var production = environments.production;
 
 gulp.task('html', function() {
     var ms = metalsmith(__dirname)
@@ -47,18 +50,18 @@ gulp.task('browser-sync', function() {
 
 gulp.task('scripts', function () {
     return gulp.src('./src/js/*.js')
-        .pipe(sourcemaps.init())
+        .pipe(development(sourcemaps.init()))
             .pipe(concat('all.js'))
-        .pipe(sourcemaps.write())
+        .pipe(development(sourcemaps.write()))
         .pipe(gulp.dest('./build/js/'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('scss', function () {
     return gulp.src('./src/scss/**/*.scss')
-        .pipe(sourcemaps.init())
+        .pipe(development(sourcemaps.init()))
         .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write())
+        .pipe(development(sourcemaps.write()))
         .pipe(postcss(processors))
         .pipe(gulp.dest('./build/css'))
         .pipe(browserSync.stream());
